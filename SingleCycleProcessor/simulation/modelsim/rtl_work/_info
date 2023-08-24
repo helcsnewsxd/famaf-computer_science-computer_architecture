@@ -1,0 +1,63 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/simulation/modelsim
+vsignext
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1692885264
+!i10b 1
+!s100 h6KGgHe0id^=kc1dS];1B0
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IfnWdROVe=LmhT2CobTYQd3
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1692885216
+8/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv
+F/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv
+!i122 0
+L0 2 15
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1692885264.000000
+!s107 /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor|/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv|
+!i113 1
+Z7 o-sv -work work
+Z8 !s92 -sv -work work +incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor
+Z9 tCvgOpt 0
+vsignext_tb
+R1
+R2
+!i10b 1
+!s100 C@jiRIimn2lQjH0Y@2=B;2
+R3
+IMF[j^KNjJBdQ[:MoA@=J>0
+R4
+S1
+R0
+w1692885191
+8/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv
+F/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv
+!i122 1
+L0 2 76
+R5
+r1
+!s85 0
+31
+R6
+!s107 /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor|/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv|
+!i113 1
+R7
+R8
+R9
