@@ -19,8 +19,8 @@ module flopr_tb
 
 	// init clock
 	always begin
-		clk = 1; #10;
-		clk = 0; #10;
+		clk = 1; #10ns;
+		clk = 0; #10ns;
 	end
 
 	logic [N : 0] test [0 : (CNT_TESTS-1)];
@@ -39,7 +39,7 @@ module flopr_tb
 		for(int i = 1; i <= CNT_TESTS; i++)
 			q_expected[i] = (test[i-1][N] ? 0 : test[i-1][(N-1) : 0]);
 		
-		reset_tb = 1; #27 reset_tb = 0;
+		reset_tb = 1; #27ns reset_tb = 0;
 	end
 	 
 	// apply tests on rising edge of clk

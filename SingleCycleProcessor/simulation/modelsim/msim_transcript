@@ -9,44 +9,54 @@
 # Copying /home/helcsnewsxd/intelFPGA_lite/20.1/modelsim_ase/linuxaloem/../modelsim.ini to modelsim.ini
 # Modifying modelsim.ini
 # 
-# vlog -sv -work work +incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor {/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv}
+# vlog -sv -work work +incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor {/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 10:54:24 on Aug 24,2023
-# vlog -reportprogress 300 -sv -work work "+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor" /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv 
-# -- Compiling module signext
+# Start time: 16:11:15 on Aug 25,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor" /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu.sv 
+# -- Compiling module alu
 # 
 # Top level modules:
-# 	signext
-# End time: 10:54:24 on Aug 24,2023, Elapsed time: 0:00:00
+# 	alu
+# End time: 16:11:15 on Aug 25,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vlog -sv -work work +incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor {/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv}
+# vlog -sv -work work +incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor {/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv}
 # Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
-# Start time: 10:54:24 on Aug 24,2023
-# vlog -reportprogress 300 -sv -work work "+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor" /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv 
-# -- Compiling module signext_tb
+# Start time: 16:11:15 on Aug 25,2023
+# vlog -reportprogress 300 -sv -work work "+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor" /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv 
+# -- Compiling module alu_tb
 # 
 # Top level modules:
-# 	signext_tb
-# End time: 10:54:24 on Aug 24,2023, Elapsed time: 0:00:00
+# 	alu_tb
+# End time: 16:11:15 on Aug 25,2023, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # 
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  signext_tb
-# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" signext_tb 
-# Start time: 10:54:24 on Aug 24,2023
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs="+acc"  alu_tb
+# vsim -t 1ps -L altera_ver -L lpm_ver -L sgate_ver -L altera_mf_ver -L altera_lnsim_ver -L cycloneive_ver -L rtl_work -L work -voptargs=""+acc"" alu_tb 
+# Start time: 16:11:15 on Aug 25,2023
 # Loading sv_std.std
-# Loading work.signext_tb
-# Loading work.signext
+# Loading work.alu_tb
+# Loading work.alu
 # 
 # add wave *
+# Unable to lock WLF file "vsim.wlf". Retrying 1 times, errno 11
+# Unable to lock WLF file "vsim.wlf". Retrying 2 times, errno 11
+# Unable to lock WLF file "vsim.wlf". Retrying 3 times, errno 11
+# Cannot lock WLF file: "vsim.wlf"
+#           errno 11: Resource temporarily unavailable.
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: helcsnewsxd  Hostname: helcsnewsxd  ProcessID: 13633
+#           Attempting to use alternate WLF file "./wlfty6qbaY".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlfty6qbaY
 # view structure
 # .main_pane.structure.interior.cs.body.struct
 # view signals
 # .main_pane.objects.interior.cs.body.tree
 # run -all
-#          13 tests completed with           0 errors
-# ** Note: $stop    : /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv(72)
-#    Time: 270 ps  Iteration: 1  Instance: /signext_tb
-# Break in Module signext_tb at /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv line 72
-# End time: 10:55:35 on Aug 24,2023, Elapsed time: 0:01:11
-# Errors: 0, Warnings: 0
+#          44 tests completed with           0 errors
+# ** Note: $stop    : /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv(131)
+#    Time: 890 ns  Iteration: 1  Instance: /alu_tb
+# Break in Module alu_tb at /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv line 131
+# End time: 16:11:44 on Aug 25,2023, Elapsed time: 0:00:29
+# Errors: 0, Warnings: 2

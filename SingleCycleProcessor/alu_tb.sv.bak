@@ -16,8 +16,8 @@ module signext_tb
 
 	// init clock
 	always begin
-		clk = 1; #10ns;
-		clk = 0; #10ns;
+		clk = 1; #10;
+		clk = 0; #10;
 	end
 
 	logic [95 : 0] test [0 : (CNT_TESTS-1)];
@@ -51,7 +51,7 @@ module signext_tb
 				{{11'b110_0101_0000, {21{1'b1}}}, {64'b0}} // EOR
 			};
 		
-		reset_tb = 1; #27ns reset_tb = 0;
+		reset_tb = 1; #27 reset_tb = 0;
 	end
 	 
 	// apply tests on rising edge of clk

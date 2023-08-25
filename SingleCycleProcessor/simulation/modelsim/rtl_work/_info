@@ -9,54 +9,54 @@ z2
 !i10f 100
 cModel Technology
 Z0 d/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/simulation/modelsim
-vsignext
+valu
 Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z2 !s110 1692885264
+Z2 !s110 1692990675
 !i10b 1
-!s100 h6KGgHe0id^=kc1dS];1B0
+!s100 2<fS1U^MSO>eZ6STDXQ==1
 Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
-IfnWdROVe=LmhT2CobTYQd3
+IZ>eYOJSf]OE^9XYgd8X4D3
 Z4 VDg1SIo80bB@j0V0VzS_@n1
 S1
 R0
-w1692885216
-8/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv
-F/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv
+w1692990645
+8/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu.sv
+F/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu.sv
 !i122 0
-L0 2 15
+L0 2 22
 Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1692885264.000000
-!s107 /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor|/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext.sv|
+Z6 !s108 1692990675.000000
+!s107 /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor|/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu.sv|
 !i113 1
 Z7 o-sv -work work
 Z8 !s92 -sv -work work +incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor
 Z9 tCvgOpt 0
-vsignext_tb
+valu_tb
 R1
 R2
 !i10b 1
-!s100 C@jiRIimn2lQjH0Y@2=B;2
+!s100 <?39YaPA]z^@GU74:36m10
 R3
-IMF[j^KNjJBdQ[:MoA@=J>0
+IV]Y2`GXOO`Ab]AjW;V6d43
 R4
 S1
 R0
-w1692885191
-8/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv
-F/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv
+w1692990659
+8/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv
+F/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv
 !i122 1
-L0 2 76
+L0 2 135
 R5
 r1
 !s85 0
 31
 R6
-!s107 /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv|
-!s90 -reportprogress|300|-sv|-work|work|+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor|/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/signext_tb.sv|
+!s107 /home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv|
+!s90 -reportprogress|300|-sv|-work|work|+incdir+/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor|/home/helcsnewsxd/Documentos/famaf/arqui/Arquitectura-del-Computador/SingleCycleProcessor/alu_tb.sv|
 !i113 1
 R7
 R8
