@@ -1,8 +1,0 @@
-module flopr
-	#(parameter N = 64)
-	 (input logic clk, reset, [N:0] d
-	  output logic [N:0] q);
-
-	
-	  
-endmodule
