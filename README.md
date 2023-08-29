@@ -13,8 +13,3 @@ Arquitectura de Computadoras 2023 correspondiente a 3er año - 2do semestre de C
   - _Computer Organization and Design: The hardware/software interface, ARM edition, Patterson, Hennessy_: <https://drive.google.com/file/d/1lssKIy9EuJ0P8CtZt9pZvj8PrV41Xv9_/view?usp=sharing>
     - En español: <https://drive.google.com/file/d/1zezthvQvirWyEVfXjc2Vba7NWVrlB2bJ/view?usp=sharing>
   - _Computer Architecture: A quantitative approach, Hennessy, Patterson_: <https://drive.google.com/file/d/1KrkLzHQkHHAqr6-K0Qmv-yks1xlVLGNG/view?usp=sharing>
-
-## To do
-
-- Repasar cosas del año pasado e investigar sobre las FPGAs
-- Ver instalación de Quartus 20.1 (instalar en la compu fija y en la notebook)
