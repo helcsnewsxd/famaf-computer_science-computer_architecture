@@ -2,9 +2,18 @@
 module maindec_tb
 	();
 
-	parameter CNT_TESTS = 7;
+	// Parameters
+	parameter CNT_TESTS = 7; // cnt of tests
 	
+	// Test bench variables
 	logic clk, reset_tb;
+	logic [8 : 0] flags_expected;
+	
+	int test_number, cnt_errors;
+	logic [37 : 0] test [0 : CNT_TESTS-1];
+		// {{Op}, {flags_expected}}
+	
+	// Module connections
 	logic [10 : 0] Op;
 	logic Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch;
 	logic [1 : 0] ALUOp;
@@ -22,18 +31,14 @@ module maindec_tb
 			.ALUOp(ALUOp)
 		);
 
-	// init clock
+	// Clock generation with 10ns period
 	always begin
-		clk = 1; #10ns;
-		clk = 0; #10ns;
+		clk = 1; #5ns;
+		clk = 0; #5ns;
 	end
-
-	logic [37 : 0] test [0 : (CNT_TESTS-1)]; // {{Op}, {flags_expected}}
-	logic [8 : 0] flags_expected;
-	int test_number, cnt_errors;
-	 
+	
 	initial begin
-		// init tests
+		// Init tests
 		test_number = 0;
 		cnt_errors = 0;
 		
@@ -48,27 +53,27 @@ module maindec_tb
 				{{11'b101_0101_0000}, {9'b000100010}}
 			};
 		
+		// First reset test bench creation
 		reset_tb = 1; #27ns reset_tb = 0;
 	end
-	 
-	// apply tests on rising edge of clk
-	always @(posedge clk) begin
-		#1 {Op, flags_expected} = test[test_number];
-	end
 	
-	// check tests on falling edge of clk
 	always @(negedge clk) begin
-		if(~reset_tb) begin;
+		// Check test executed on positive edge of clk
+		if(~reset_tb) begin;		
 			if({Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp} !== flags_expected) begin
 				$display("Error in test number %d with input = { Op = %b } and output = { flags = %b } --> The expected output was { flags_expected= %b }", test_number, Op, {Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp}, flags_expected);
 				cnt_errors++;
 			end
 			test_number++;
+			
 			if(test_number === CNT_TESTS) begin
-				$display("%d tests completed with %d errors", test_number, cnt_errors);
-				$stop;
+				$display("%d tests completed with %d errors", CNT_TESTS, cnt_errors);
+				#5ns $stop;
 			end
 		end
+		
+		// Prepare next test to positive edge of clk
+		#2ns {Op, flags_expected} = test[test_number]; #2ns;
 	end
 	
 endmodule
