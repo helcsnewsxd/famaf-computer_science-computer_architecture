@@ -1,10 +1,19 @@
 // Immediate signed extension test bench module
 module signext_tb
 	();
-
-	parameter CNT_TESTS = 13;
 	
+	// Parameters
+	parameter CNT_TESTS = 13; // cnt of tests
+	
+	// Test bench variables
 	logic clk, reset_tb;
+	logic [63 : 0] y_expected;
+	
+	int test_number, cnt_errors;
+	logic [95 : 0] test [0 : CNT_TESTS-1];
+		// {{a}, {y_expected}}
+	
+	// Module connections
 	logic [31 : 0] a;
 	logic [63 : 0] y;
 
@@ -14,20 +23,17 @@ module signext_tb
 			.y(y)
 		);
 
-	// init clock
+	// Clock generation with 10ns period
 	always begin
-		clk = 1; #10ns;
-		clk = 0; #10ns;
+		clk = 1; #5ns;
+		clk = 0; #5ns;
 	end
-
-	logic [95 : 0] test [0 : (CNT_TESTS-1)];
-	logic [63 : 0] y_expected;
-	int test_number, cnt_errors;
-	 
+	
 	initial begin
-		// init tests
+		// Init tests
 		test_number = 0;
 		cnt_errors = 0;
+		
 		test = 
 			// {{instruction}, {expected_result}}
 			'{
@@ -51,27 +57,27 @@ module signext_tb
 				{{11'b110_0101_0000, {21{1'b1}}}, {64'b0}} // EOR
 			};
 		
+		// First reset test bench creation
 		reset_tb = 1; #27ns reset_tb = 0;
 	end
-	 
-	// apply tests on rising edge of clk
-	always @(posedge clk) begin
-		#1 {a, y_expected} = test[test_number];
-	end
 	
-	// check tests on falling edge of clk
 	always @(negedge clk) begin
+		// Check test executed on positive edge of clk
 		if(~reset_tb) begin;
 			if(y !== y_expected) begin
-				$display("Error in test number %d with input = { a = %b } and output = { y = %b } --> The expected output was { y_expected = %b}", test_number, a, y, y_expected);
+				$display("Error in test number %d with input = { a = %d } and output = { y = %d } --> The expected output was { y_expected = %d }", test_number, a, y, y_expected);
 				cnt_errors++;
 			end
 			test_number++;
+			
 			if(test_number === CNT_TESTS) begin
-				$display("%d tests completed with %d errors", test_number, cnt_errors);
-				$stop;
+				$display("%d tests completed with %d errors", CNT_TESTS, cnt_errors);
+				#5ns $stop;
 			end
 		end
+		
+		// Prepare next test to positive edge of clk
+		#2ns {a, y_expected} = test[test_number]; #2ns;
 	end
 	
 endmodule
