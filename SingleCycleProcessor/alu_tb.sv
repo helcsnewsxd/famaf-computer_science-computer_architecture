@@ -1,10 +1,20 @@
-// Arithmetic-logic unit test bench module
+// Arithmetic-logic unit module
 module alu_tb
 	();
-
-	parameter CNT_TESTS = 44;
 	
+	// Parameters
+	parameter CNT_TESTS = 44; // cnt of tests
+	
+	// Test bench variables
 	logic clk, reset_tb;
+	logic [63 : 0] result_expected;
+	logic zero_expected;
+	
+	int test_number, cnt_errors;
+	logic [196 : 0] test [0 : CNT_TESTS-1];
+		// {{a}, {b}, {ALUControl}, {result_expected}, {zero_expected}}
+	
+	// Module connections
 	logic [63 : 0] a, b, result;
 	logic [3 : 0] ALUControl;
 	logic zero;
@@ -18,21 +28,17 @@ module alu_tb
 			.zero(zero)
 		);
 
-	// init clock
+	// Clock generation with 10ns period
 	always begin
-		clk = 1; #10ns;
-		clk = 0; #10ns;
+		clk = 1; #5ns;
+		clk = 0; #5ns;
 	end
-
-	logic [196 : 0] test [0 : (CNT_TESTS-1)]; // {{a}, {b}, {ALUControl}, {result}, {zero}}
-	logic [63 : 0] result_expected;
-	logic zero_expected;
-	int test_number, cnt_errors;
-	 
+	
 	initial begin
-		// init tests
+		// Init tests
 		test_number = 0;
 		cnt_errors = 0;
+		
 		test = 
 			'{
 				// Two positive numbers
@@ -110,27 +116,27 @@ module alu_tb
 					{{64'd18441095276975396848}, {64'd0}, {4'b0111}, {64'd0}, {1'b1}}
 			};
 		
+		// First reset test bench creation
 		reset_tb = 1; #27ns reset_tb = 0;
 	end
-	 
-	// apply tests on rising edge of clk
-	always @(posedge clk) begin
-		#1 {a, b, ALUControl, result_expected, zero_expected} = test[test_number];
-	end
 	
-	// check tests on falling edge of clk
 	always @(negedge clk) begin
+		// Check test executed on positive edge of clk
 		if(~reset_tb) begin;
 			if(result !== result_expected || zero !== zero_expected) begin
 				$display("Error in test number %d with input = { a = %b, b = %b, ALUControl = %b } and output = { result = %b, zero = %b } --> The expected output was { result_expected = %b, zero_expected = %b }", test_number, a, b, ALUControl, result, zero, result_expected, zero_expected);
 				cnt_errors++;
 			end
 			test_number++;
+			
 			if(test_number === CNT_TESTS) begin
-				$display("%d tests completed with %d errors", test_number, cnt_errors);
-				$stop;
+				$display("%d tests completed with %d errors", CNT_TESTS, cnt_errors);
+				#5ns $stop;
 			end
 		end
+		
+		// Prepare next test to positive edge of clk
+		#2ns {a, b, ALUControl, result_expected, zero_expected} = test[test_number]; #2ns;
 	end
 	
 endmodule
