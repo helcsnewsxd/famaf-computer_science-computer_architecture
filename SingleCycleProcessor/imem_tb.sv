@@ -1,11 +1,21 @@
-// ROM test bench module
+// ROM module
 module imem_tb
 	();
-
-	parameter CNT_TESTS = 50;
+	
+	// Parameters
+	parameter CNT_TESTS = 50; // cnt of tests
 	parameter N = 32;
 	
+	// Test bench variables
 	logic clk, reset_tb;
+	logic [31 : 0] initROM [0 : 63];
+	logic [31 : 0] q_expected;
+	
+	int test_number, cnt_errors;
+	logic [37 : 0] test [0 : CNT_TESTS-1];
+		// {{addr}, {q_expected}}
+	
+	// Module connections
 	logic [5 : 0] addr;
 	logic [31 : 0] q;
 
@@ -15,19 +25,14 @@ module imem_tb
 			.q(q)
 		);
 
-	// init clock
+	// Clock generation with 10ns period
 	always begin
-		clk = 1; #10ns;
-		clk = 0; #10ns;
+		clk = 1; #5ns;
+		clk = 0; #5ns;
 	end
-
-	logic [31 : 0] initROM [0 : 63];
-	logic [37 : 0] test [0 : (CNT_TESTS-1)]; // {{addr}, {q_expected}}
-	logic [31 : 0] q_expected;
-	int test_number, cnt_errors;
-	 
+	
 	initial begin
-		// init tests
+		// Init tests
 		test_number = 0;
 		cnt_errors = 0;
 		
@@ -83,30 +88,30 @@ module imem_tb
 				32'hb400001f
 			};
 		
-		for(logic [5 : 0] i = 0; i < CNT_TESTS; i++)
-			test[i] = {i, initROM[i]};
+		for(int i = 0; i < CNT_TESTS; i++)
+			test[i] = {5'(i), initROM[i]};
 		
+		// First reset test bench creation
 		reset_tb = 1; #27ns reset_tb = 0;
 	end
-	 
-	// apply tests on rising edge of clk
-	always @(posedge clk) begin
-		#1 {addr, q_expected} = test[test_number];
-	end
 	
-	// check tests on falling edge of clk
 	always @(negedge clk) begin
+		// Check test executed on positive edge of clk
 		if(~reset_tb) begin;
 			if(q !== q_expected) begin
 				$display("Error in test number %d with input = { addr = %b } and output = { q = %b } --> The expected output was { q_expected= %b }", test_number, addr, q, q_expected);
 				cnt_errors++;
 			end
 			test_number++;
+			
 			if(test_number === CNT_TESTS) begin
-				$display("%d tests completed with %d errors", test_number, cnt_errors);
-				$stop;
+				$display("%d tests completed with %d errors", CNT_TESTS, cnt_errors);
+				#5ns $stop;
 			end
 		end
+		
+		// Prepare next test to positive edge of clk
+		#2ns {addr, q_expected} = test[test_number]; #2ns;
 	end
 	
 endmodule
