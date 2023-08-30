@@ -36,7 +36,6 @@ module imem_tb
 		test_number = 0;
 		cnt_errors = 0;
 		
-		initROM = '{64{32'b0}};
 		initROM[0 : 46] =
 			'{
 				32'hf8000001,
@@ -87,9 +86,12 @@ module imem_tb
 				32'hf81f83d9,
 				32'hb400001f
 			};
+			
+		for(int i = 47; i < 64; i++)
+			initROM[i] = '0;
 		
-		for(int i = 0; i < CNT_TESTS; i++)
-			test[i] = {5'(i), initROM[i]};
+		for(logic[5 : 0] i = 0; i < CNT_TESTS; i++)
+			test[i] = {i, initROM[i]};
 		
 		// First reset test bench creation
 		reset_tb = 1; #27ns reset_tb = 0;
@@ -99,7 +101,7 @@ module imem_tb
 		// Check test executed on positive edge of clk
 		if(~reset_tb) begin;
 			if(q !== q_expected) begin
-				$display("Error in test number %d with input = { addr = %b } and output = { q = %b } --> The expected output was { q_expected= %b }", test_number, addr, q, q_expected);
+				$display("Error in test number %d with input = { addr = %d } and output = { q = %h } --> The expected output was { q_expected = %h }", test_number, addr, q, q_expected);
 				cnt_errors++;
 			end
 			test_number++;
