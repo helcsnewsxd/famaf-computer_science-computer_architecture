@@ -1,13 +1,22 @@
-// Asinc Flip-Flop D test bench
+// Async Flip-Flop D test bench
 module flopr_tb
 	();
 	
+	// Parameters
+	parameter CNT_TESTS = 10; // cnt of tests
 	parameter N = 64; // cnt bits of register
-	parameter R = 5; // first reset interval
-	parameter CNT_TESTS = 11; // test 10 cases because the first thing into the flip flop is trash
 	
-	logic clk, reset, reset_tb;
-	logic [(N-1) : 0] d, q;
+	// Test bench variables
+	logic clk, reset_tb;
+	logic [N-1 : 0] d_auxiliar, q_expected;
+	
+	int test_number, cnt_errors;
+	logic [2*N : 0] test [0 : CNT_TESTS];
+		// {{reset}, {d}, {q_expected}}
+	
+	// Module connections
+	logic reset;
+	logic [N-1 : 0] d, q;
 
 	flopr #(N) dut
 		(
@@ -17,49 +26,47 @@ module flopr_tb
 			.q(q)
 		);
 
-	// init clock
+	// Clock generation with 10ns period
 	always begin
-		clk = 1; #10ns;
-		clk = 0; #10ns;
-	end
-
-	logic [N : 0] test [0 : (CNT_TESTS-1)];
-	logic [(N-1) : 0] q_expected [0 : (CNT_TESTS-1)];
-	int test_number, cnt_errors;
-	 
-	initial begin
-		// init tests
-		test_number = 0;
-		cnt_errors = 0;
-		for(int i = 0; i < CNT_TESTS; i++) begin
-			test[i][N] = (i < R ? 1 : 0);
-			test[i][(N-1) : 0] = (i ? test[i - 1][(N-1) : 0] - 1 : (1 << N) - 1);
-		end
-		q_expected[0] = 0; // is trash
-		for(int i = 1; i <= CNT_TESTS; i++)
-			q_expected[i] = (test[i-1][N] ? 0 : test[i-1][(N-1) : 0]);
-		
-		reset_tb = 1; #27ns reset_tb = 0;
-	end
-	 
-	// apply tests on rising edge of clk
-	always @(posedge clk) begin
-		#1 {reset, d} = test[test_number];
+		clk = 1; #5ns;
+		clk = 0; #5ns;
 	end
 	
-	// check tests on falling edge of clk
+	initial begin
+		// Init tests
+		test_number = 0;
+		cnt_errors = 0;
+		
+		for(int i = 0; i <= CNT_TESTS; i++) begin
+			d_auxiliar = {2{32'($urandom())}};
+			test[i] = {
+				1'(i < CNT_TESTS/2),
+				d_auxiliar,
+				(i < CNT_TESTS/2 ? 64'b0 : d_auxiliar)
+			};
+		end
+		
+		// First reset test bench creation
+		reset_tb = 1; #27ns reset_tb = 0;
+	end
+	
 	always @(negedge clk) begin
+		// Check test executed on positive edge of clk
 		if(~reset_tb) begin;
-			if(q !== q_expected[test_number]) begin
-				$display("Error with input = { reset = %b, d = %b } and output = { q = %b } --> The expected output was { q_expected = %b}", reset, d, q, q_expected[test_number]);
+			if(q !== q_expected) begin
+				$display("Error in test number %d with input = { reset = %d, d = %d } and output = { q = %d } --> The expected output was { q_expected = %d }", test_number, reset, d, q, q_expected);
 				cnt_errors++;
 			end
 			test_number++;
-			if(test_number === CNT_TESTS) begin
-				$display("%d tests completed with %d errors", test_number, cnt_errors);
-				$stop;
+			
+			if(test_number > CNT_TESTS) begin
+				$display("%d tests completed with %d errors", CNT_TESTS, cnt_errors);
+				#5ns $stop;
 			end
 		end
+		
+		// Prepare next test to positive edge of clk
+		#2ns {reset, d, q_expected} = test[test_number]; #2ns;
 	end
 	
 endmodule
