@@ -59,7 +59,7 @@ module flopr_tb ();
         fd
     ) !== 0) begin
       error_code = $fgets(line, fd);
-      if (line.substr(0, 1) === "//") continue;
+      if (line === "" || line.substr(0, 1) === "//") continue;
       error_code = $sscanf(line, "%b %d %d", reset_in[cnt_tests], d_in[cnt_tests], q_in[cnt_tests]);
       cnt_tests++;
     end
