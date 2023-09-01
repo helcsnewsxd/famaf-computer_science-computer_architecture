@@ -2,15 +2,17 @@
 module fetch_tb ();
 
   // Parameters
-  parameter CNT_TESTS = 10;  // cnt of tests
+  parameter CNT_MAX_TESTS = 10000;  // maximum cnt of tests
 
   // Test bench variables
   logic clk, reset_tb;
   logic [63 : 0] PCBranch_F_auxiliar, PCCounter_auxiliar, imem_addr_F_expected;
 
-  int test_number, cnt_errors;
-  logic [129 : 0] test[0 : CNT_TESTS-1];
-  // {{PCSrc_F}, {reset}, {PCBranch_F}, {imem_addr_F_expected}}
+  int fd, error_code, cnt_tests, test_number, cnt_errors;
+  string input_file_path, line;
+
+  logic PCSrc_F_in[0:CNT_MAX_TESTS], reset_in[0:CNT_MAX_TESTS];
+  logic [63 : 0] PCBranch_F_in[0:CNT_MAX_TESTS], imem_addr_F_in[0:CNT_MAX_TESTS];
 
   // Module connections
   logic PCSrc_F, reset;
@@ -34,22 +36,47 @@ module fetch_tb ();
 
   initial begin
     // Init tests
+    cnt_tests = 0;
     test_number = 0;
     cnt_errors = 0;
 
-    PCBranch_F_auxiliar = {2{32'($urandom())}};
-    PCCounter_auxiliar = 64'b0;
-    for (int i = 0; i < CNT_TESTS; i++) begin
-      if (i < 5) test[i] = {{1'b0}, {1'b1}, {PCBranch_F_auxiliar}, {PCCounter_auxiliar}};
-      else if (i != CNT_TESTS) begin
-        PCCounter_auxiliar += 4;
-        test[i] = {{1'b0}, {1'b0}, {PCBranch_F_auxiliar}, {PCCounter_auxiliar}};
-      end else test[i] = {{1'b1}, {1'b0}, {PCBranch_F_auxiliar}, {PCBranch_F_auxiliar}};
+    // Get input file path
+    input_file_path = `__FILE__;
+    for (int i = input_file_path.len(); i >= 0; i--)
+      if (input_file_path[i] == "/") begin
+        input_file_path = input_file_path.substr(0, i);
+        break;
+      end
+
+    // Open and read input file
+    fd = $fopen({input_file_path, "input-files/fetch_tb_in"}, "r");
+    if (fd === 0) begin
+      $display("ERROR when open the input file: %0d", fd);
+      $stop;
     end
+
+    while (!$feof(
+        fd
+    ) !== 0) begin
+      error_code = $fgets(line, fd);
+      if (line === "" || line === "\n" || line.substr(0, 1) === "//") continue;
+      error_code = $sscanf(
+          line,
+          "%b %b %d %d",
+          PCSrc_F_in[cnt_tests],
+          reset_in[cnt_tests],
+          PCBranch_F_in[cnt_tests],
+          imem_addr_F_in[cnt_tests]
+      );
+      cnt_tests++;
+    end
+
+    $fclose(fd);
 
     // First reset test bench creation
     reset_tb = 1;
-    #27ns reset_tb = 0;
+    #27ns;
+    reset_tb = 0;
   end
 
   always @(negedge clk) begin
@@ -66,15 +93,19 @@ module fetch_tb ();
       end
       test_number++;
 
-      if (test_number === CNT_TESTS) begin
-        $display("%d tests completed with %d errors", CNT_TESTS, cnt_errors);
-        #5ns $stop;
+      if (test_number === cnt_tests) begin
+        $display("%d tests completed with %d errors", cnt_tests, cnt_errors);
+        #5ns;
+        $stop;
       end
     end
 
     // Prepare next test to positive edge of clk
     #2ns;
-    {PCSrc_F, reset, PCBranch_F, imem_addr_F_expected} = test[test_number];
+    PCSrc_F = PCSrc_F_in[test_number];
+    reset = reset_in[test_number];
+    PCBranch_F = PCBranch_F_in[test_number];
+    imem_addr_F_expected = imem_addr_F_in[test_number];
     #2ns;
   end
 
