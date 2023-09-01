@@ -1,4 +1,4 @@
-// Fetch module
+// Fetch test bench module
 module fetch_tb
 	();
 
