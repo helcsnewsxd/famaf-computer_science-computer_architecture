@@ -36,6 +36,7 @@ module flopr_tb ();
 
   initial begin
     // Init tests
+    cnt_tests = 0;
     test_number = 0;
     cnt_errors = 0;
 
