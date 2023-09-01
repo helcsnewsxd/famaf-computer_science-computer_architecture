@@ -1,12 +1,5 @@
 from random import getrandbits, randint
 
-N = 64
-
-def twoComplement(number): # for N bits
-    if number >= 0:
-        return number
-    return (~(-number)+1) + (1 << N)
-
 def setCntBits(number, cntBits):
     return number & ((1 << cntBits) - 1)
 
