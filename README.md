@@ -13,3 +13,16 @@ Arquitectura de Computadoras 2023 correspondiente a 3er año - 2do semestre de C
   - _Computer Organization and Design: The hardware/software interface, ARM edition, Patterson, Hennessy_: <https://drive.google.com/file/d/1lssKIy9EuJ0P8CtZt9pZvj8PrV41Xv9_/view?usp=sharing>
     - En español: <https://drive.google.com/file/d/1zezthvQvirWyEVfXjc2Vba7NWVrlB2bJ/view?usp=sharing>
   - _Computer Architecture: A quantitative approach, Hennessy, Patterson_: <https://drive.google.com/file/d/1KrkLzHQkHHAqr6-K0Qmv-yks1xlVLGNG/view?usp=sharing>
+
+## Información interesante sobre el Quartus
+
+- Usar VSCode como editor: <https://blog.csdn.net/qq_46588746/article/details/108780967>
+- Poner *autoformatter on save* a los archivos: <https://marketplace.visualstudio.com/items?itemName=bmpenuelas.systemverilog-formatter-vscode&ssr=false#overview>
+  - La config debe ser en **settings.json** del VSCode
+
+    ```json
+    "[systemverilog]": {
+        "editor.defaultFormatter": "bmpenuelas.systemverilog-formatter-vscode",
+        "editor.formatOnSave": true,
+    },
+    ```
