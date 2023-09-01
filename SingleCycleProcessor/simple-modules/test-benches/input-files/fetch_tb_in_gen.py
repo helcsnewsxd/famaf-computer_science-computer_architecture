@@ -1,7 +1,9 @@
 from random import getrandbits, randint
 
+
 def setCntBits(number, cntBits):
     return number & ((1 << cntBits) - 1)
+
 
 def printValues(PCSrc_F, reset, PCBranch_F, imem_addr_F_expected):
     PCSrc_F = setCntBits(int(PCSrc_F), 1)
@@ -11,17 +13,19 @@ def printValues(PCSrc_F, reset, PCBranch_F, imem_addr_F_expected):
 
     print(f"{PCSrc_F} {reset} {PCBranch_F} {imem_addr_F_expected}")
 
+
 def createTestCase(PCSrc_F, reset, PCBranch_F):
     if reset:
         PC[0] = 0
     elif PCSrc_F:
         PC[0] = PCBranch_F
-    
+
     imem_addr_F_expected = PC[0]
 
     printValues(PCSrc_F, reset, PCBranch_F, imem_addr_F_expected)
 
     PC[0] += 4
+
 
 print("// PCSrc_F, reset, PCBranch_F, imem_addr_F_expected")
 PC = [0]

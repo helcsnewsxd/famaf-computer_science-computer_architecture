@@ -1,7 +1,9 @@
 from random import getrandbits, randint
 
+
 def setCntBits(number, cntBits):
     return number & ((1 << cntBits) - 1)
+
 
 def printValues(we3, ra1, ra2, wa3, wd3, rd1_expected, rd2_expected):
     we3 = setCntBits(int(we3), 1)
@@ -13,15 +15,17 @@ def printValues(we3, ra1, ra2, wa3, wd3, rd1_expected, rd2_expected):
     rd2_expected = setCntBits(rd2_expected, 64)
     print(f"{we3} {ra1} {ra2} {wa3} {wd3} {rd1_expected} {rd2_expected}")
 
+
 def createTestCase(we3, ra1, ra2, wa3, wd3):
     if we3 and wa3 != 31:
         reg[wa3] = wd3
     printValues(we3, ra1, ra2, wa3, wd3, reg[ra1], reg[ra2])
 
+
 print("// we3, ra1, ra2, wa3, wd3, rd1_expected, rd2_expected")
 reg = []
 for i in range(32):
-    reg.append(i%31)
+    reg.append(i % 31)
 
 # Check initialization
 for i in range(32):

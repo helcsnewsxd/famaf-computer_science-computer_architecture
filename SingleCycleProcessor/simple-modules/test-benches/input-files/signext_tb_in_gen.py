@@ -1,7 +1,9 @@
 from random import getrandbits, randint
 
+
 def setCntBits(number, cntBits):
     return number & ((1 << cntBits) - 1)
+
 
 def gen(test_number, negative):
     # LDUR, STUR
@@ -16,14 +18,14 @@ def gen(test_number, negative):
         test_number >>= 3
         imm = (negative << 18) + getrandbits(18)
         a = (test_number << 24) + (imm << 5) + getrandbits(5)
-        y = (imm << 2)
+        y = imm << 2
         if negative:
             y += ((1 << 43) - 1) << 21
     # Not implemented instructions
     else:
         a = (test_number << 21) + getrandbits(21)
         y = 0
-    
+
     a = setCntBits(a, 32)
     y = setCntBits(y, 64)
 
@@ -31,7 +33,9 @@ def gen(test_number, negative):
 
 
 print("// a, y_expected")
-cnt_tests = (1 << 11) # to test all possible opcodes with negative and positive immediates
+cnt_tests = (
+    1 << 11
+)  # to test all possible opcodes with negative and positive immediates
 for i in range(cnt_tests):
     for j in range(2):
         gen(i, j)
