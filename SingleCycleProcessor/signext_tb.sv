@@ -63,7 +63,7 @@ module signext_tb
 	
 	always @(negedge clk) begin
 		// Check test executed on positive edge of clk
-		if(~reset_tb) begin;
+		if(~reset_tb) begin
 			if(y !== y_expected) begin
 				$display("Error in test number %d with input = { a = %d } and output = { y = %d } --> The expected output was { y_expected = %d }", test_number, a, y, y_expected);
 				cnt_errors++;

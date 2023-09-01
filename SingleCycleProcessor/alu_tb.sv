@@ -122,7 +122,7 @@ module alu_tb
 	
 	always @(negedge clk) begin
 		// Check test executed on positive edge of clk
-		if(~reset_tb) begin;
+		if(~reset_tb) begin
 			if(result !== result_expected || zero !== zero_expected) begin
 				$display("Error in test number %d with input = { a = %b, b = %b, ALUControl = %b } and output = { result = %b, zero = %b } --> The expected output was { result_expected = %b, zero_expected = %b }", test_number, a, b, ALUControl, result, zero, result_expected, zero_expected);
 				cnt_errors++;

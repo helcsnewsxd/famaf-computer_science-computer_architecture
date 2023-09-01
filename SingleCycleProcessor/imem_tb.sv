@@ -99,7 +99,7 @@ module imem_tb
 	
 	always @(negedge clk) begin
 		// Check test executed on positive edge of clk
-		if(~reset_tb) begin;
+		if(~reset_tb) begin
 			if(q !== q_expected) begin
 				$display("Error in test number %d with input = { addr = %d } and output = { q = %h } --> The expected output was { q_expected = %h }", test_number, addr, q, q_expected);
 				cnt_errors++;

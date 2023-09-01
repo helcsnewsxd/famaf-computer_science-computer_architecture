@@ -59,7 +59,7 @@ module maindec_tb
 	
 	always @(negedge clk) begin
 		// Check test executed on positive edge of clk
-		if(~reset_tb) begin;		
+		if(~reset_tb) begin
 			if({Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp} !== flags_expected) begin
 				$display("Error in test number %d with input = { Op = %b } and output = { flags = %b } --> The expected output was { flags_expected= %b }", test_number, Op, {Reg2Loc, ALUSrc, MemtoReg, RegWrite, MemRead, MemWrite, Branch, ALUOp}, flags_expected);
 				cnt_errors++;

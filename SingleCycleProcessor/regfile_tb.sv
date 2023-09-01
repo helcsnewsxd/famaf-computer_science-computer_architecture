@@ -59,7 +59,7 @@ module regfile_tb
 	
 	always @(negedge clk) begin
 		// Check test executed on positive edge of clk
-		if(~reset_tb) begin;
+		if(~reset_tb) begin
 			// Test writing (reading the written register)
 			if(test_number >= 32)
 				we3 = 1'b0;

@@ -52,7 +52,7 @@ module flopr_tb
 	
 	always @(negedge clk) begin
 		// Check test executed on positive edge of clk
-		if(~reset_tb) begin;
+		if(~reset_tb) begin
 			if(q !== q_expected) begin
 				$display("Error in test number %d with input = { reset = %d, d = %d } and output = { q = %d } --> The expected output was { q_expected = %d }", test_number, reset, d, q, q_expected);
 				cnt_errors++;
