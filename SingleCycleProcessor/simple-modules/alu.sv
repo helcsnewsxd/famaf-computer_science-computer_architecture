@@ -1,11 +1,9 @@
 // Arithmetic-logic unit module
-module alu #(
-    parameter N = 64
-) (
-    input logic [N-1 : 0] a,
+module alu (
+    input logic [63 : 0] a,
     b,
     input logic [3 : 0] ALUControl,
-    output logic [N-1 : 0] result,
+    output logic [63 : 0] result,
     output logic zero
 );
 
@@ -19,7 +17,7 @@ module alu #(
       default: result = 0;  // Important: it never executes !!!
     endcase
 
-    zero = (result === 0);
+    zero = (result == 64'b0);
   end
 
 endmodule

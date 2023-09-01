@@ -3,26 +3,25 @@ module alu_tb ();
 
   // Parameters
   parameter CNT_MAX_TESTS = 10000;  // maximum cnt of tests
-  parameter N = 64;
 
   // Test bench variables
   logic clk, reset_tb;
-  logic [N-1 : 0] result_expected;
+  logic [63 : 0] result_expected;
   logic zero_expected;
 
   int fd, error_code, cnt_tests, test_number, cnt_errors;
   string input_file_path, line;
 
-  logic [N-1 : 0] a_in[0 : CNT_MAX_TESTS], b_in[0 : CNT_MAX_TESTS], result_in[0 : CNT_MAX_TESTS];
+  logic [63 : 0] a_in[0 : CNT_MAX_TESTS], b_in[0 : CNT_MAX_TESTS], result_in[0 : CNT_MAX_TESTS];
   logic [3 : 0] ALUControl_in[0 : CNT_MAX_TESTS];
   logic zero_in[0 : CNT_MAX_TESTS];
 
   // Module connections
-  logic [N-1 : 0] a, b, result;
+  logic [63 : 0] a, b, result;
   logic [3 : 0] ALUControl;
   logic zero;
 
-  alu #(N) dut (
+  alu dut (
       .a(a),
       .b(b),
       .ALUControl(ALUControl),
