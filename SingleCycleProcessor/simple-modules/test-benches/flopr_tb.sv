@@ -2,16 +2,18 @@
 module flopr_tb ();
 
   // Parameters
-  parameter CNT_TESTS = 10;  // cnt of tests
+  parameter CNT_MAX_TESTS = 1000;  // maximum cnt of tests
   parameter N = 64;  // cnt bits of register
 
   // Test bench variables
   logic clk, reset_tb;
   logic [N-1 : 0] d_auxiliar, q_expected;
 
-  int test_number, cnt_errors;
-  logic [2*N : 0] test[0 : CNT_TESTS];
-  // {{reset}, {d}, {q_expected}}
+  int fd, error_code, cnt_tests, test_number, cnt_errors;
+  string input_file_path, line;
+
+  logic reset_in[0 : CNT_MAX_TESTS];
+  logic [N-1 : 0] d_in[0 : CNT_MAX_TESTS], q_in[0 : CNT_MAX_TESTS];
 
   // Module connections
   logic reset;
@@ -35,16 +37,38 @@ module flopr_tb ();
   initial begin
     // Init tests
     test_number = 0;
-    cnt_errors  = 0;
+    cnt_errors = 0;
 
-    for (int i = 0; i <= CNT_TESTS; i++) begin
-      d_auxiliar = {2{32'($urandom())}};
-      test[i] = {1'(i < CNT_TESTS / 2), d_auxiliar, (i < CNT_TESTS / 2 ? 64'b0 : d_auxiliar)};
+    // Get input file path
+    input_file_path = `__FILE__;
+    for (int i = input_file_path.len(); i >= 0; i--)
+      if (input_file_path[i] == "/") begin
+        input_file_path = input_file_path.substr(0, i);
+        break;
+      end
+
+    // Open and read input file
+    fd = $fopen({input_file_path, "input-files/flopr_tb_in"}, "r");
+    if (fd === 0) begin
+      $display("ERROR when open the input file: %0d", fd);
+      $stop;
     end
+
+    while (!$feof(
+        fd
+    ) !== 0) begin
+      error_code = $fgets(line, fd);
+      if (line.substr(0, 1) === "//") continue;
+      error_code = $sscanf(line, "%b %d %d", reset_in[cnt_tests], d_in[cnt_tests], q_in[cnt_tests]);
+      cnt_tests++;
+    end
+
+    $fclose(fd);
 
     // First reset test bench creation
     reset_tb = 1;
-    #27ns reset_tb = 0;
+    #27ns;
+    reset_tb = 0;
   end
 
   always @(negedge clk) begin
@@ -60,15 +84,18 @@ module flopr_tb ();
       end
       test_number++;
 
-      if (test_number > CNT_TESTS) begin
-        $display("%d tests completed with %d errors", CNT_TESTS, cnt_errors);
-        #5ns $stop;
+      if (test_number === cnt_tests) begin
+        $display("%d tests completed with %d errors", cnt_tests, cnt_errors);
+        #5ns;
+        $stop;
       end
     end
 
     // Prepare next test to positive edge of clk
     #2ns;
-    {reset, d, q_expected} = test[test_number];
+    reset = reset_in[test_number];
+    d = d_in[test_number];
+    q_expected = q_in[test_number];
     #2ns;
   end
 
