@@ -1,6 +1,6 @@
 // Fetch module
 module fetch #(
-    parameter N
+    parameter N = 64
 ) (
     input logic PCSrc_F,
     clk,

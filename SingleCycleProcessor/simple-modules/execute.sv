@@ -1,6 +1,6 @@
 // Execute module
 module execute #(
-    parameter N
+    parameter N = 64
 ) (
     input logic AluSrc,
     input logic [3 : 0] AluControl,
