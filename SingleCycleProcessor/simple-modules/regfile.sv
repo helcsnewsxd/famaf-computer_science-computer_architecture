@@ -49,8 +49,10 @@ module regfile #(
   };
 
   // read (async)
-  assign rd1 = X[ra1];
-  assign rd2 = X[ra2];
+  always_comb begin
+    rd1 = X[ra1];
+    rd2 = X[ra2];
+  end
 
   // write (sync)
   always @(posedge clk) if (we3 && wa3 !== 31) X[wa3] <= wd3;
