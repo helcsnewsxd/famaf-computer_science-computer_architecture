@@ -18,9 +18,9 @@ def gen(test_number, negative):
         test_number >>= 3
         imm = (negative << 18) + getrandbits(18)
         a = (test_number << 24) + (imm << 5) + getrandbits(5)
-        y = imm << 2
+        y = imm
         if negative:
-            y += ((1 << 43) - 1) << 21
+            y += ((1 << 45) - 1) << 19
     # Not implemented instructions
     else:
         a = (test_number << 21) + getrandbits(21)
