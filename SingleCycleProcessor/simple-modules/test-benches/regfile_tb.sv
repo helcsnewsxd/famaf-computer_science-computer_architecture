@@ -3,24 +3,25 @@ module regfile_tb ();
 
   // Parameters
   parameter CNT_MAX_TESTS = 10000;  // maximum cnt of tests
+  parameter N = 64;
 
   // Test bench variables
   logic clk, reset_tb;
-  logic [63 : 0] rd1_expected, rd2_expected, wd3_auxiliar;
+  logic [N-1 : 0] rd1_expected, rd2_expected, wd3_auxiliar;
 
   int fd, error_code, cnt_tests, test_number, test_type, cnt_errors;
   string input_file_path, line;
 
   logic we3_in[0 : CNT_MAX_TESTS];
   logic [4 : 0] ra1_in[0 : CNT_MAX_TESTS], ra2_in[0 : CNT_MAX_TESTS], wa3_in[0 : CNT_MAX_TESTS];
-  logic [63 : 0] wd3_in[0 : CNT_MAX_TESTS], rd1_in[0 : CNT_MAX_TESTS], rd2_in[0 : CNT_MAX_TESTS];
+  logic [N-1 : 0] wd3_in[0 : CNT_MAX_TESTS], rd1_in[0 : CNT_MAX_TESTS], rd2_in[0 : CNT_MAX_TESTS];
 
   // Module connections
   logic we3;
   logic [4 : 0] ra1, ra2, wa3;
-  logic [63 : 0] wd3, rd1, rd2;
+  logic [N-1 : 0] wd3, rd1, rd2;
 
-  regfile dut (
+  regfile #(N) dut (
       .clk(clk),
       .we3(we3),
       .ra1(ra1),
