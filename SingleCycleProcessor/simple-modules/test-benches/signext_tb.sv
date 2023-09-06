@@ -3,22 +3,23 @@ module signext_tb ();
 
   // Parameters
   parameter CNT_MAX_TESTS = 10000;  // maximum cnt of tests
+  parameter N = 64;
 
   // Test bench variables
   logic clk, reset_tb;
-  logic [63 : 0] y_expected;
+  logic [N-1 : 0] y_expected;
 
   int fd, error_code, cnt_tests, test_number, cnt_errors;
   string input_file_path, line;
 
-  logic [31 : 0] a_in[0 : CNT_MAX_TESTS];
-  logic [63 : 0] y_in[0 : CNT_MAX_TESTS];
+  logic [ 31 : 0] a_in[0 : CNT_MAX_TESTS];
+  logic [N-1 : 0] y_in[0 : CNT_MAX_TESTS];
 
   // Module connections
-  logic [31 : 0] a;
-  logic [63 : 0] y;
+  logic [ 31 : 0] a;
+  logic [N-1 : 0] y;
 
-  signext dut (
+  signext #(N) dut (
       .a(a),
       .y(y)
   );
