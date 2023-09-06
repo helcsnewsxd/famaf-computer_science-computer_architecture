@@ -1,31 +1,33 @@
 // Fetch module
-module fetch (
+module fetch #(
+    parameter N = 64
+) (
     input logic PCSrc_F,
     clk,
     reset,
-    input logic [63 : 0] PCBranch_F,
-    output logic [63 : 0] imem_addr_F
+    input logic [N-1 : 0] PCBranch_F,
+    output logic [N-1 : 0] imem_addr_F
 );
 
-  logic [63 : 0] d_internal, next_instruction_internal;
+  logic [N-1 : 0] d_internal, next_instruction_internal, b_internal = 4;
 
-  mux2 #(64) MUX (
+  mux2 #(N) MUX (
       .d0(next_instruction_internal),
       .d1(PCBranch_F),
       .s (PCSrc_F),
       .y (d_internal)
   );
 
-  flopr PC (
+  flopr #(N) PC (
       .clk(clk),
       .reset(reset),
       .d(d_internal),
       .q(imem_addr_F)
   );
 
-  adder #(64) Add (
+  adder #(N) Add (
       .a(imem_addr_F),
-      .b(64'd4),
+      .b(b_internal),
       .y(next_instruction_internal)
   );
 

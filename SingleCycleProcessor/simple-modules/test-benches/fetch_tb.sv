@@ -3,22 +3,23 @@ module fetch_tb ();
 
   // Parameters
   parameter CNT_MAX_TESTS = 10000;  // maximum cnt of tests
+  parameter N = 64;
 
   // Test bench variables
   logic clk, reset_tb;
-  logic [63 : 0] PCBranch_F_auxiliar, PCCounter_auxiliar, imem_addr_F_expected;
+  logic [N-1 : 0] PCBranch_F_auxiliar, PCCounter_auxiliar, imem_addr_F_expected;
 
   int fd, error_code, cnt_tests, test_number, cnt_errors;
   string input_file_path, line;
 
   logic PCSrc_F_in[0:CNT_MAX_TESTS], reset_in[0:CNT_MAX_TESTS];
-  logic [63 : 0] PCBranch_F_in[0:CNT_MAX_TESTS], imem_addr_F_in[0:CNT_MAX_TESTS];
+  logic [N-1 : 0] PCBranch_F_in[0:CNT_MAX_TESTS], imem_addr_F_in[0:CNT_MAX_TESTS];
 
   // Module connections
   logic PCSrc_F, reset;
-  logic [63 : 0] PCBranch_F, imem_addr_F;
+  logic [N-1 : 0] PCBranch_F, imem_addr_F;
 
-  fetch dut (
+  fetch #(N) dut (
       .PCSrc_F(PCSrc_F),
       .clk(clk),
       .reset(reset),
