@@ -3,10 +3,11 @@ module execute_tb ();
 
   // Parameters
   parameter CNT_MAX_TESTS = 10000;  // maximum cnt of tests
+  parameter N = 64;
 
   // Test bench variables
   logic clk, reset_tb;
-  logic [63 : 0] PCBranch_E_expected, aluResult_E_expected, writeData_E_expected;
+  logic [N-1 : 0] PCBranch_E_expected, aluResult_E_expected, writeData_E_expected;
   logic zero_E_expected;
 
   int fd, error_code, cnt_tests, test_number, cnt_errors;
@@ -14,7 +15,7 @@ module execute_tb ();
 
   logic AluSrc_in[0:CNT_MAX_TESTS], zero_E_in[0:CNT_MAX_TESTS];
   logic [3 : 0] AluControl_in[0:CNT_MAX_TESTS];
-  logic [63 : 0]
+  logic [N-1 : 0]
       PC_E_in[0:CNT_MAX_TESTS],
       signImm_E_in[0:CNT_MAX_TESTS],
       readData1_E_in[0:CNT_MAX_TESTS],
@@ -26,9 +27,9 @@ module execute_tb ();
   // Module connections
   logic AluSrc, zero_E;
   logic [3 : 0] AluControl;
-  logic [63 : 0] PC_E, signImm_E, readData1_E, readData2_E, PCBranch_E, aluResult_E, writeData_E;
+  logic [N-1 : 0] PC_E, signImm_E, readData1_E, readData2_E, PCBranch_E, aluResult_E, writeData_E;
 
-  execute dut (
+  execute #(N) dut (
       .AluSrc(AluSrc),
       .AluControl(AluControl),
       .PC_E(PC_E),
