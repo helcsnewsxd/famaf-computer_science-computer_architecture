@@ -1,23 +1,11 @@
-# Arquitectura-del-Computador
+# Arquitectura del Computador - 2023
 
-Arquitectura de Computadoras 2023 correspondiente a 3er año - 2do semestre de Computación en FAMAF (UNC)
+El presente repositorio contiene todo el material de la materia Arquitectura de Computadoras 2023 correspondiente a 3er año - 2do semestre de la Licenciatura en Ciencias de la Computación en la Facultad de Matemática, Astronomía, Física y Computación (FAMAF) de la Universidad Nacional de Córdoba (UNC).
 
-## Información importante
+## Información importante del Quartus
 
-- Aula virtual: <https://famaf.aulavirtual.unc.edu.ar/course/view.php?id=176>
-  - Vieja: <https://famaf-consultas.aulavirtual.unc.edu.ar/course/view.php?id=1023>
-- Bibliografía:
-  - _SystemVerilog For Design, Second Edition, Sutherland, Davidmann, Flake_: <https://drive.google.com/file/d/1cSUF4DF-nnYGW_9DwX15L9qj9MsgYfH-/view?usp=sharing>
-  - _Heterogeneous Computing with OpenCL 2.0, Kaeli, Mistry, Schaa, Zhang_: <https://drive.google.com/file/d/1f8718D7eakIE74Qn2z94wDqfBvPp6_mk/view?usp=sharing>
-  - _Digital Design and Computer Architecture, ARM Edition, Harris, Harris_: <https://drive.google.com/file/d/1n3d3aYOENu674aKaF1asq7LRa-K1xPlz/view?usp=sharing>
-  - _Computer Organization and Design: The hardware/software interface, ARM edition, Patterson, Hennessy_: <https://drive.google.com/file/d/1lssKIy9EuJ0P8CtZt9pZvj8PrV41Xv9_/view?usp=sharing>
-    - En español: <https://drive.google.com/file/d/1zezthvQvirWyEVfXjc2Vba7NWVrlB2bJ/view?usp=sharing>
-  - _Computer Architecture: A quantitative approach, Hennessy, Patterson_: <https://drive.google.com/file/d/1KrkLzHQkHHAqr6-K0Qmv-yks1xlVLGNG/view?usp=sharing>
-
-## Información interesante sobre el Quartus
-
-- Usar VSCode como editor: <https://blog.csdn.net/qq_46588746/article/details/108780967>
-- Poner *autoformatter on save* a los archivos: <https://marketplace.visualstudio.com/items?itemName=bmpenuelas.systemverilog-formatter-vscode&ssr=false#overview>
+- ¿Cómo usar VSCode como editor?: <https://blog.csdn.net/qq_46588746/article/details/108780967>
+- ¿Cómo poner *autoformatter on save* a los archivos del quartus?: <https://marketplace.visualstudio.com/items?itemName=bmpenuelas.systemverilog-formatter-vscode&ssr=false#overview>
   - La config debe ser en **settings.json** del VSCode
 
     ```json
@@ -26,3 +14,26 @@ Arquitectura de Computadoras 2023 correspondiente a 3er año - 2do semestre de C
         "editor.formatOnSave": true,
     },
     ```
+
+## Primera parte: Procesador de un solo ciclo (práctico)
+
+| Unidad | Tema | Enunciado | Resolución |
+| ------ | ---- | --------- | ---------- |
+| 1 | Procesador de un solo ciclo | [PDF](./Primera%20parte%20-%20Práctico/SingleCycleProcessor-Enunciado.pdf) | [Carpeta](/Primera%20parte%20-%20Práctico/SingleCycleProcessor/) |
+| 2 | Test del procesador de un solo ciclo | [PDF](./Primera%20parte%20-%20Práctico/SingleCycleProcessor2-Test-Enunciado.pdf) | [Carpeta](./Primera%20parte%20-%20Práctico/SingleCycleProcessor/) |
+| 3 | Procesador de un solo ciclo con excepciones | [PDF](./Primera%20parte%20-%20Práctico/SingleCycleProcessorWithExceptions%20-%20Guide.pdf) | [Carpeta](./Primera%20parte%20-%20Práctico/SingleCycleProcessorWithExceptions/) |
+
+## Segunda parte: Mejoras al procesador (teórico y práctico)
+
+| Unidad | Tema | Resumen y solución a los ejercicios |
+| ------ | ---- | ------------------------------------- |
+| 5 | Jerarquía de memoria | [JUAN](./Segunda%20parte%20-%20Teórico%20y%20Práctico/5%20-%20JUAN%20-%20Jerarquía%20de%20Memorias.pdf) y [EMA](./Segunda%20parte%20-%20Teórico%20y%20Práctico/5%20-%20EMA%20-%20Jerarquía%20de%20Memorias.pdf) |
+| 6 | Técnicas de mejora de rendimiento | [EMA](./Segunda%20parte%20-%20Teórico%20y%20Práctico/6%20-%20EMA%20-%20Técnicas%20de%20mejora%20de%20rendimiento.pdf) |
+| 7 | Dynamic Scheduling | [EMA](./Segunda%20parte%20-%20Teórico%20y%20Práctico/7%20-%20EMA%20-%20Dynamic%20Scheduling.pdf) |
+
+## Laboratorios
+
+| Proyecto | Desarrollo |
+| -------- | ---------- |
+| Laboratorio 1: ARMv8 en SystemVerilog | [Repositorio](https://github.com/helcsnewsxd/famaf-computer_science-computer_architecture-lab1) |
+| Laboratorio 2: Análisis de Microarquitecturas | [Repositorio](https://github.com/helcsnewsxd/famaf-computer_science-computer_architecture-lab2) |
