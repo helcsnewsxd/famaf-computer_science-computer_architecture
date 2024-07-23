@@ -1,6 +1,0 @@
-[submodule "Laboratorios/Laboratorio-ARMv8-en-SystemVerilog---Arquitectura-del-Computador"]
-	path = Laboratorios/Laboratorio-ARMv8-en-SystemVerilog---Arquitectura-del-Computador
-	url = git@github.com:helcsnewsxd/Laboratorio-ARMv8-en-SystemVerilog---Arquitectura-del-Computador.git
-[submodule "Laboratorios/Laboratorio-2_Analisis-de-microarquitecturas"]
-	path = Laboratorios/Laboratorio-2_Analisis-de-microarquitecturas
-	url = git@github.com:helcsnewsxd/Laboratorio-2_Analisis-de-microarquitecturas.git
