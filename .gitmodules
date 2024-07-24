@@ -1,0 +1,6 @@
+[submodule "Lab1_ARMv8_en_SystemVerilog"]
+	path = Lab1_ARMv8_en_SystemVerilog
+	url = https://github.com/helcsnewsxd/famaf-computer_science-computer_architecture-lab1
+[submodule "Lab2_Analisis_de_Microarquitecturas"]
+	path = Lab2_Analisis_de_Microarquitecturas
+	url = https://github.com/helcsnewsxd/famaf-computer_science-computer_architecture-lab2
